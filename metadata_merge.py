@@ -1,16 +1,29 @@
 """
 Code to merge patient data with their ailment data.
 """
+"""
+author: @CHETANKARKHANIS
+"""
 
+from pyspark import SparkConf
+from pyspark import SparkContext
 from pyspark.sql import SparkSession
+from pyspark.sql.functions import *
 
-DE_File = "/usr/local/spark/README.md"
-spark = SparkSession.builder.appName("SimpleApp").getOrCreate()
-logData = spark.read.text(logFile).cache()
+#set sparkConf,sparkContext and sparkSession
+def spark_conf():
+    conf = SparkConf().setAppName("mergeMetaData").set("spark.executor.memory", "4g").setMaster("spark://54.185.228.175:7077")
+    sc = SparkContext(conf=conf)
+    spark = SparkSession.builder.getOrCreate()
+    return spark
 
-numA = logData.filter(logData.value.contains('a')).count()
-numB = logData.filter(logData.value.contains('b')).count()
+def read_file(spark):
+    de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv",format="csv",header='True',sep=",").cache()
+    cardio = de_file.filter(de_file.value.contains('Emphysema')).count()
+    print("Lines with Emphysema: " +  str(cardio) ) 
 
-print("Lines with a: %i, lines with b: %i"  % (numA, numB))
-
-spark.stop()
+def main():
+    spark = spark_conf()
+    read_file(spark)
+   
+    spark.stop()
