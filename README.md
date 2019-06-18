@@ -17,6 +17,13 @@ and/or an API interface. Over time, this image dataset will grow rich with data 
 be used by DS for training their models. This will lead to data democratization where the data is 
 created 'by the DS, for the DS'.
 
+TECH STACK
+AWS S3
+Apache Spark
+Elasticsearch
+Flask
 
 PRESENTATION LINK
 https://docs.google.com/presentation/d/13mzy8v6vL_H5hHzG-TSgwcwa1oWdROWq8nicGFgDyVk/edit?usp=sharing
+
+
