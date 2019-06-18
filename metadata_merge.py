@@ -12,7 +12,7 @@ from pyspark.sql.functions import *
 
 #set sparkConf,sparkContext and sparkSession
 def spark_conf():
-    conf = SparkConf().setAppName("mergeMetaData").set("spark.executor.memory", "4g").setMaster("spark://54.185.228.175:7077")
+    conf = SparkConf().setAppName("mergeMetaData").set("spark.executor.memory", "4g")#.setMaster("spark://54.185.228.175:7077")
     sc = SparkContext(conf=conf)
     spark = SparkSession.builder.getOrCreate()
     return spark
