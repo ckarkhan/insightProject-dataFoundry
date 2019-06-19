@@ -20,8 +20,12 @@ def spark_conf():
 def read_file(spark):
     de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv",format="csv",header='True',sep=",")
     cardio = de_file.filter(de_file.value.contains('Emphysema')).count()
-    print("Lines with Emphysema: " +  str(cardio) ) 
+
+    return cardio
+    
 
 def main():
     spark = spark_conf()
-    read_file(spark)
+
+    print("Lines with Emphysema: " +  str(read_file(spark)) ) 
+    
