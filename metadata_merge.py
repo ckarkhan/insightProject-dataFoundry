@@ -17,18 +17,20 @@ def spark_conf():
     spark = SparkSession.builder.getOrCreate()
     return spark
 
-def read_file(spark):
-    print('debug1')
-    de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv",format="csv",header='True',sep=",")
-    print('debug2')
-    cardio = de_file.filter(de_file['Finding Labels'].contains('Emphysema')).count()
 
-    return cardio
-    
+def readAndprocess_files(spark):
+    """Read in the Data Entry and BBox metadata files from S3 """
+
+     de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv",format="csv",header='True',sep=",")
+     bbox_file = spark.read.load("s3a://chest-xray-source-images/flat_files/BBox_List_2017.csv",format="csv",header='True',sep=",")
+
+     print(de_file.columns() , str(de_file.count())
+     print(bbox_file.columns() , str(bbox_file.count())
+
 
 def main():
     spark = spark_conf()
+    readAndprocess_files(spark)
 
-    print("Lines with Emphysema: " +  str(read_file(spark)) ) 
-    
-main()
+if name == "main":
+    main()
