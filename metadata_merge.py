@@ -32,5 +32,5 @@ def main():
     spark = spark_conf()
     readAndprocess_files(spark)
 
-if name == "main":
-    main()
+
+main()
