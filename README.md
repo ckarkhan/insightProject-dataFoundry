@@ -1,5 +1,5 @@
 # insightProject-trainYourMLmodelsBetter
-Insights Data Science project for achieving super human feats in data engineering. 
+Insights Data Engineering project for achieving super human feats in data engineering. 
 
 This file the overall reason why this project was built, the problem that it addresses and a possible solution.
 
