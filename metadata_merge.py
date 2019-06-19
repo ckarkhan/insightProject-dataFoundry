@@ -31,6 +31,4 @@ def main():
 
     print("Lines with Emphysema: " +  str(read_file(spark)) ) 
     
-
-if name ==  "main":
-    main()
+main()
