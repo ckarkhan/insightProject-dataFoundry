@@ -24,8 +24,8 @@ def readAndprocess_files(spark):
     de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv")
     bbox_file = spark.read.load("s3a://chest-xray-source-images/flat_files/BBox_List_2017.csv")
 
-    print(de_file.columns + str(de_file.count()) )
-    print(bbox_file.columns + str(bbox_file.count()) )
+    print(de_file.columns)
+    print(bbox_file.columns)
 
 
 def main():
