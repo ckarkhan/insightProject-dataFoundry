@@ -25,8 +25,9 @@ def readAndprocess_files(spark):
     bbox_file = spark.read.load("s3a://chest-xray-source-images/flat_files/BBox_List_2017.csv",format="csv",header='True',sep=",")
 
     df_merged = de_file.join(bbox_file, ["Image Index"], "left_outer")
+    df_merged = df_merged.drop(bbox_file["Finding Label"])
 
-    print(df_merged.head(50))
+    print(df_merged.head(20))
 
 
 def main():
