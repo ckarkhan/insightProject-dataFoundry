@@ -21,8 +21,8 @@ def spark_conf():
 def readAndprocess_files(spark):
     """Read in the Data Entry and BBox metadata files from S3 """
 
-    de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv")
-    bbox_file = spark.read.load("s3a://chest-xray-source-images/flat_files/BBox_List_2017.csv")
+    de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv",format="csv",header='True',sep=",")
+    bbox_file = spark.read.load("s3a://chest-xray-source-images/flat_files/BBox_List_2017.csv",format="csv",header='True',sep=",")
 
     print(de_file.columns)
     print(bbox_file.columns)
