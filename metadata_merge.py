@@ -26,7 +26,7 @@ def readAndprocess_files(spark):
 
     df_merged = de_file.join(bbox_file, ["Image Index"], "left_outer")
 
-    print(df_merged.collect(20))
+    print(df_merged.head(50))
 
 
 def main():
