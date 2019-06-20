@@ -24,8 +24,10 @@ def readAndprocess_files(spark):
     de_file = spark.read.load("s3a://chest-xray-source-images/flat_files/Data_Entry_2017.csv",format="csv",header='True',sep=",")
     bbox_file = spark.read.load("s3a://chest-xray-source-images/flat_files/BBox_List_2017.csv",format="csv",header='True',sep=",")
 
-    print(de_file.columns)
-    print(bbox_file.columns)
+    df_merged = de_file.join(bbox_file, de_file("[Image Index]") == bbox_file("[Image Index]"), "left_outer")
+
+    print(df_merged.columns)
+    print(df_merged.count())
 
 
 def main():
