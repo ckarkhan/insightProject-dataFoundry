@@ -36,7 +36,7 @@ def readAndprocess_files(spark):
     df_merged = de_file.join(bbox_file, ["Image Index"], "left_outer")
     df_merged = df_merged.drop(bbox_file["Finding Label"])
 
-    df_merged_json = json.dumps(json.loads(df_merged.toJSON())) 
+    df_merged_json = json.loads(json.dumps(df_merged.toJSON())) 
     print(df_merged_json)
 
     #df_merged_json.foreach(print_rows)
