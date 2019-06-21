@@ -9,6 +9,7 @@ from pyspark import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
+import json
 
 #set sparkConf,sparkContext and sparkSession
 def spark_conf():
@@ -16,6 +17,14 @@ def spark_conf():
     sc = SparkContext(conf=conf)
     spark = SparkSession.builder.getOrCreate()
     return spark
+
+
+def print_rows(row):
+    """ Print rows of datapram as a JSON encoded Python dictionary. """
+
+    data = json.loads(row)
+    for key in data:
+        print("{key}:{value}".format(key=key, value=data[key]))
 
 
 def readAndprocess_files(spark):
@@ -27,11 +36,10 @@ def readAndprocess_files(spark):
     df_merged = de_file.join(bbox_file, ["Image Index"], "left_outer")
     df_merged = df_merged.drop(bbox_file["Finding Label"])
 
-    import json
-    df_json = json.dumps(df_merged)
+    df_merged_json = json.loads(df_merged.toJSON())
 
-    print(df_json.head(20))
-
+    df_merged_json.foreach(print_rows)
+    
 
 def main():
     sprk = spark_conf()
