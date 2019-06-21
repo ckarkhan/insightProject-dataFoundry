@@ -37,8 +37,8 @@ def readAndprocess_files(spark):
     df_merged = df_merged.drop(bbox_file["Finding Label"])
 
 
-    df_merged_dict = df_merged.collecAsMap()
-    df_merged_dict["a key"] 
+    df_merged_dict = df_merged.collectAsMap()
+    print(df_merged_dict) 
 
     """ df_merged_json = json.dumps(df_merged.toJSON())
     # print(df_merged_json)
