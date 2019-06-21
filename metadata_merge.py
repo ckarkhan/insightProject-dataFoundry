@@ -27,7 +27,10 @@ def readAndprocess_files(spark):
     df_merged = de_file.join(bbox_file, ["Image Index"], "left_outer")
     df_merged = df_merged.drop(bbox_file["Finding Label"])
 
-    print(df_merged.head(20))
+    import json
+    df_json = json.dumps(df_merged)
+
+    print(df_json.head(20))
 
 
 def main():
