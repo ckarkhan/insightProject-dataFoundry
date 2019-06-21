@@ -38,7 +38,7 @@ def readAndprocess_files(spark):
 
     df_merged_json = df_merged.toJSON()
 
-    for i in df_merged_json:
+    for i in df_merged_json.collect():
         print(df_merged_json[i])
     # print(df_merged_json)
     #df_merged_json.foreach(print_rows)
