@@ -34,23 +34,23 @@ def readAndProcessFiles(spark):
         .withColumn("Doctor_Review", lit('')) \
         .withColumn("Doctor_Review_Date", lit(''))
 
-
-    """ Writing to Elasticsearch Index
-    df_augmented_metadata = df_augmented_metadata.write.format('org.elasticsearch.spark.sql') \
-        .option('es.nodes', '10.0.0.13').option('es.port', '9200') \
-        .option('es.mapping.id', 'Image Index') \
-        .option('es.resource', '%s/%s' % ('xray_chest_2', 'staff_notes')).save()"""
-
     return df_augmented_metadata
 
+
 def writeES(df):
-    """ Writing to Elasticsearch Index"""
+    """ Writing to Elasticsearch Index 
+        and defining Image Index field as the doc_id. """
+
     df_final_metadata = df.write.format('org.elasticsearch.spark.sql') \
         .option('es.nodes', '10.0.0.13').option('es.port', '9200') \
         .option('es.mapping.id', 'Image Index') \
-        .option('es.resource', '%s/%s' % ('xray_chest_3', 'staff_notes')).save()
+        .option('es.resource', '%s/%s' % ('xray_chest', 'staff_notes')).save()
+
 
 def main():
+    """Main method to call the above methods for data processing and 
+    pushing to Elasticsearch. """
+    
     sprk = sparkConf()
     df_aug = readAndProcessFiles(sprk)
     writeES(df_aug)
