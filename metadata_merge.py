@@ -11,7 +11,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 
 
-def sparkCconf():
+def sparkConf():
     """Setting up some initial configs."""
     conf = SparkConf().setAppName("mergeMetaData").set("spark.executor.memory", "6g")
     sc = SparkContext(conf=conf)
@@ -51,7 +51,7 @@ def writeES(df):
         .option('es.resource', '%s/%s' % ('xray_chest_3', 'staff_notes')).save()
 
 def main():
-    sprk = spark_conf()
+    sprk = sparkConf()
     df_aug = readAndProcessFiles(sprk)
     writeES(df_aug)
 
