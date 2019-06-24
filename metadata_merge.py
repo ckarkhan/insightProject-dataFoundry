@@ -36,17 +36,27 @@ def readAndprocess_files(spark):
     df_merged = de_file.join(bbox_file, ["Image Index"], "left_outer")
     df_merged = df_merged.drop(bbox_file["Finding Label"])
 
-    df_merged_json = df_merged.toJSON()
+    df_augmented_metadata = df_merged.withColumn("Clinician_Notes", lit('')) \
+        .withColumn("Clinician_Date", lit('')) \
+        .withColumn("Doctor_Review", lit('')) \
+        .withColumn("Doctor_Review_Date", lit(''))
 
-    for i in df_merged_json.collect():
-        print(i)
-    # print(df_merged_json)
-    #df_merged_json.foreach(print_rows)
+    df_augmented_metadata.show(5)
+
+    #df_merged_json = df_merged.toJSON()
+
+    """ for i in df_merged_json.collect():
+        print(i) """
+
+    # return df_merged_json
+
 
 
 def main():
     sprk = spark_conf()
     readAndprocess_files(sprk)
+
+
 
 
 main()
