@@ -36,6 +36,7 @@ def readAndprocess_files(spark):
     df_merged = de_file.join(bbox_file, ["Image Index"], "left_outer")
     df_merged = df_merged.drop(bbox_file["Finding Label"])
 
+    """ Adding  columns to dataframe for adding notes from doctors and clinicians. """
     df_augmented_metadata = df_merged.withColumn("Clinician_Notes", lit('')) \
         .withColumn("Clinician_Date", lit('')) \
         .withColumn("Doctor_Review", lit('')) \
@@ -43,6 +44,14 @@ def readAndprocess_files(spark):
 
     df_augmented_metadata.show(5)
 
+    """ Writing to Elasticsearch Index"""
+    df_augmented_metadata = df_augmented_metadata.write.format('org.elasticsearch.spark.sql') \
+        .option('es.nodes', '54.218.4.105').option('es.port', 9200) \
+        .option('es.resource', '%s/%s' % ('xray_chest', 'staff_notes')).save()
+
+
+    print("ES Index created.")
+    
     #df_merged_json = df_merged.toJSON()
 
     """ for i in df_merged_json.collect():
