@@ -46,7 +46,7 @@ def readAndprocess_files(spark):
 
     """ Writing to Elasticsearch Index"""
     df_augmented_metadata = df_augmented_metadata.write.format('org.elasticsearch.spark.sql') \
-        .option('es.nodes', 'http://54.218.4.105').option('es.port', '9200') \
+        .option('es.nodes', '10.0.0.13').option('es.port', '9200') \
         .option('es.resource', '%s/%s' % ('xray_chest', 'staff_notes')).save()
 
 
