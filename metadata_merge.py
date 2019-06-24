@@ -9,7 +9,7 @@ from pyspark import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
-import json
+
 
 #set sparkConf,sparkContext and sparkSession
 def spark_conf():
@@ -17,14 +17,6 @@ def spark_conf():
     sc = SparkContext(conf=conf)
     spark = SparkSession.builder.getOrCreate()
     return spark
-
-
-def print_rows(row):
-    """ Print rows of datapram as a JSON encoded Python dictionary. """
-
-    data = json.loads(row)
-    for key in data:
-        print("{key}:{value}".format(key=key, value=data[key]))
 
 
 def readAndprocess_files(spark):
@@ -42,22 +34,12 @@ def readAndprocess_files(spark):
         .withColumn("Doctor_Review", lit('')) \
         .withColumn("Doctor_Review_Date", lit(''))
 
-    df_augmented_metadata.show(5)
 
     """ Writing to Elasticsearch Index"""
     df_augmented_metadata = df_augmented_metadata.write.format('org.elasticsearch.spark.sql') \
         .option('es.nodes', '10.0.0.13').option('es.port', '9200') \
-        .option('es.resource', '%s/%s' % ('xray_chest', 'staff_notes')).save()
-
-
-    print("ES Index created.")
-
-    #df_merged_json = df_merged.toJSON()
-
-    """ for i in df_merged_json.collect():
-        print(i) """
-
-    # return df_merged_json
+        .option('es.mapping.id', 'Image Index') \
+        .option('es.resource', '%s/%s' % ('xray_chest_2', 'staff_notes')).save()
 
 
 
