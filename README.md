@@ -1,8 +1,6 @@
-# insightProject-trainYourMLmodelsBetter
-Insights Data Engineering project for achieving super human feats in data engineering. 
+# insightProject-trainYourMLmodelsBetter 
 
-This file the overall reason why this project was built, the problem that it addresses and a possible solution.
-
+This is my project at Insight Data Engineering. 
 
 PROBLEM STATEMENT
 Meta-data around image files is usually not that rich. Feeding such low quality data to ML models for 
@@ -16,6 +14,7 @@ augment the default metadata accompanying the image(s) with meaningful metadata 
 and/or an API interface. Over time, this image dataset will grow rich with data supplied by DS and can 
 be used by DS for training their models. This will lead to data democratization where the data is 
 created 'by the DS, for the DS'.
+
 
 TECH STACK
 AWS S3
