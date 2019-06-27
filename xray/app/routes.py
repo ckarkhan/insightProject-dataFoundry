@@ -7,7 +7,7 @@ def index():
     return render_template('index.html', title='Home')
 
 
-@app.route('/one_image/<imgid>')
+@app.route('/one_image/<imgId>')
 def getOneImageData(imgId):
     """Function to retrieve one image's data from elasticseach."""
 
