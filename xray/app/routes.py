@@ -19,6 +19,7 @@ def getOneImageData(imgId):
     file_id = '000' + str(imgId) + '.png'
    
     resp = es.get(index=index, doc_type=doc_type, id=file_id)
+    print(resp)
 
     return render_template('one_image.html', result = resp(['_source']))
 
