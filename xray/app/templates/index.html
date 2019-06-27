@@ -5,5 +5,11 @@
     <body>
         <h1>Hello, {{ user.username }}! Welcome to X-Ray Annotations.</h1>
         <h2>Thank You for contributing to better clinical diagnosis with metadata enrichment.</h2>
+
+        <label for="name">Enter Image ID - XXXXX_XXX (9 characters as shown):</label>
+
+        <input type="text" id="name" name="name" required
+                minlength="9" maxlength="9" size="10">   
+
     </body>
 </html>
