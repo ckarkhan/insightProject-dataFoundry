@@ -2,7 +2,7 @@ from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 from app import app
 
-@app.route('/ck')
+@app.route('/')
 def index():
     return render_template('index.html', title='Home')
 
@@ -20,7 +20,7 @@ def getOneImageData(imgId):
     resp = es.get(index=index, doc_type=doc_type, id=file_id)
     print(resp)
 
-    return render_template('one_image.html', result = resp(['_source']))
+    return render_template('one_image.html',  resp(['_source']))
 
 
 if __name__ == '__main__':
