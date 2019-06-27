@@ -2,13 +2,12 @@ from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
 from app import app
 
-@app.route('/')
-@app.route('/index')
+@app.route('/ck')
 def index():
     return render_template('index.html', title='Home')
 
 
-@app.route('/one_image/<imgId>')
+@app.route('/one_image/<imgid>')
 def getOneImageData(imgId):
     """Function to retrieve one image's data from elasticseach."""
 
