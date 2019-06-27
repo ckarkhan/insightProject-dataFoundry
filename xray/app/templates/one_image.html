@@ -3,7 +3,14 @@
 <html>
    <body>
       <table border = 1>
-         {% for key, value in result.items() %}
+         {% for key, value in result.items()
+            if key == "Image_Location":%}
+            <tr>
+                    <th> {{ key }} </th>
+                    <td> <img src={{ value }}> </td>
+                 </tr>
+            {% endif %}
+
             <tr>
                <th> {{ key }} </th>
                <td> {{ value }} </td>
