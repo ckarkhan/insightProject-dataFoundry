@@ -1,11 +1,7 @@
 from elasticsearch import Elasticsearch
-import sys
-
 
 def getOneImageData(imgId):
     """Function to retrieve one image's data from elasticseach."""
-
-    print(imgId)
 
     host = 'http://10.0.0.13:9200'
 
@@ -13,7 +9,7 @@ def getOneImageData(imgId):
     doc_type = 'staff_notes'
 
     es = Elasticsearch(host)
-    file_id = str(imgId) + '.png'
+    file_id = '000' + str(imgId) + '.png'
    
     resp = es.get(index=index, doc_type=doc_type, id=file_id)
 
