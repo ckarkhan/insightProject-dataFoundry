@@ -24,4 +24,4 @@ def getOneImageData(imgId):
 
 
 if __name__ == '__main__':
-    app.run('10.0.0.4', 5000, debug=True)
+    app.run('54.245.40.185', 5000, debug=True)
