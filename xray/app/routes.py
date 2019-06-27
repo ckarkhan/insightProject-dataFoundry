@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 from elasticsearch import Elasticsearch
+import boto3
 from app import app
 
 @app.route('/')
@@ -16,9 +17,14 @@ def getOneImageData(imgId):
     doc_type = 'staff_notes'
     es = Elasticsearch(host)
     file_id = '000' + str(imgId) + '.png'
+
+    s3_loc = 's3://chest-xray-source-images/image_store/' + file_id
    
     resp = es.get(index=index, doc_type=doc_type, id=file_id)
     resp1 = resp['_source']
+    resp1.update({'Image_Location': s3_loc})
+
+    print(resp1)
 
     return render_template('one_image.html',  result = resp1)
 
