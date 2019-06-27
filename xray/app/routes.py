@@ -18,9 +18,10 @@ def getOneImageData(imgId):
     file_id = '000' + str(imgId) + '.png'
    
     resp = es.get(index=index, doc_type=doc_type, id=file_id)
-    print(resp)
+    resp1 = resp(['_source'])
+    print(resp1)
 
-    return render_template('one_image.html',  resp(['_source']))
+    return render_template('one_image.html',  result = resp1)
 
 
 if __name__ == '__main__':
