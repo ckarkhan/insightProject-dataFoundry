@@ -4,10 +4,10 @@
    <body>
       <table border = 1>
          {% for key, value in result.items() %}
-            {% if key == "Image_Location" %}
+            {% if key == "Image" %}
             <tr>
                     <th> {{ key }} </th>
-                    <td> <img src={{ value }}> </td>
+                    <td> <img src={{value}} height="50" width="65"> </td>
                  </tr>
             {% else %}
 
