@@ -7,9 +7,9 @@ from app import app
 def index():
     return render_template('index.html', title='Home')
 
-@app.route("/splash.png")
+""" @app.route("/splash.png")
 def load_image():
-    return send_file('splash.png')
+    return send_file('splash.png') """
 
 
 @app.route('/one_image/<imgId>')
