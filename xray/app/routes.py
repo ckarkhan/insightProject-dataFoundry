@@ -22,7 +22,7 @@ def getOneImageData(imgId):
    
     resp = es.get(index=index, doc_type=doc_type, id=file_id)
     resp1 = resp['_source']
-    resp1.update({'Image': s3_loc})
+    resp1.update({'Image_View': s3_loc})
 
     print(resp1)
 
