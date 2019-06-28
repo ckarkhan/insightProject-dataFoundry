@@ -24,10 +24,4 @@ def getOneImageData(imgId):
     resp1 = resp['_source']
     resp1.update({'Image_View': s3_loc})
 
-    print(resp1)
-
     return render_template('one_image.html',  result = resp1)
-
-
-if __name__ == '__main__':
-    app.run('54.245.40.185', 5000, debug=True)
