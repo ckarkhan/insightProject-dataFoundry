@@ -1,1 +1,2 @@
 FLASK_APP=xray.py
+FLASK_ENV=development
