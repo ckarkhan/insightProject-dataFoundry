@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 from elasticsearch import Elasticsearch
 import boto3
 from app import app
@@ -6,6 +6,10 @@ from app import app
 @app.route('/')
 def index():
     return render_template('index.html', title='Home')
+
+@app.route("/splash.png")
+def load_index_js():
+    return send_file('splash.png')
 
 
 @app.route('/one_image/<imgId>')
