@@ -8,7 +8,7 @@ def index():
     return render_template('index.html', title='Home')
 
 @app.route("/splash.png")
-def load_index_js():
+def load_image():
     return send_file('splash.png')
 
 
