@@ -26,9 +26,12 @@ def getOneImageData(imgId):
         file_id = '000' + str(imgId) + '.png'
 
         s3_loc = 'https://chest-xray-source-images.s3-us-west-2.amazonaws.com/image_store/' + file_id
-    
-        resp = es.get(index=index, doc_type=doc_type, id=file_id)
-        resp1 = resp['_source']
-        resp1.update({'Image_View': s3_loc})
+
+        try:
+            resp = es.get(index=index, doc_type=doc_type, id=file_id)
+            resp1 = resp['_source']
+            resp1.update({'Image_View': s3_loc})
+        except Exception as ex:
+            resp1 = {imgId: ex}
 
     return render_template('one_image.html',  result = resp1)
