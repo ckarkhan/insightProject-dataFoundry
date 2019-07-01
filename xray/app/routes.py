@@ -31,7 +31,7 @@ def getOneImageData(imgId):
             resp = es.get(index=index, doc_type=doc_type, id=file_id)
             resp1 = resp['_source']
             resp1.update({'Image_View': s3_loc})
-        except Exception as ex:
-            resp1 = {imgId: ex}
+        except :
+            resp1 = {imgId: "Requested Image Not Found."}
 
     return render_template('one_image.html',  result = resp1)
