@@ -35,3 +35,7 @@ def getOneImageData(imgId):
             resp1 = {imgId: "Requested Image Not Found."}
 
     return render_template('one_image.html',  result = resp1)
+
+
+if __name__ == "__main__":
+    app.run(port="80", host="0.0.0.0")
