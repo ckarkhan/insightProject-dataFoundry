@@ -3,6 +3,8 @@ from elasticsearch import Elasticsearch
 import boto3
 from app import app
 
+
+app = Flask(__name__)
 @app.route('/')
 def index():
     return render_template('index.html', title='Home')
