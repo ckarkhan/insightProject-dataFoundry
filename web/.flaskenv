@@ -1,2 +1,2 @@
-FLASK_APP=x-ray.py
+FLASK_APP=app.py
 FLASK_ENV=development
