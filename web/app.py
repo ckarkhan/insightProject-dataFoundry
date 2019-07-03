@@ -2,12 +2,15 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 from dash.dependencies import Input, Output
+from tabs import tab_1
+from tabs import tab_2
 
 from elasticsearch import Elasticsearch
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app.config.suppress_callback_exceptions = True
 
 colors = {
     'background': '#111111',
@@ -43,13 +46,22 @@ app.layout = html.Div(style={'backgroundColor': colors['background']}, children=
               [Input('tabs-styled-with-props', 'value')])
 def render_content(tab):
     if tab == 'tab-1':
-        return html.Div([
-            html.H3('Tab content 1')
-        ])
+        return tab_1.tab_1_layout
     elif tab == 'tab-2':
-        return html.Div([
-            html.H3('Tab content 2')
-        ])
+        return tab_2.tab_2_layout
+
+# Tab 1 callback
+@app.callback(dash.dependencies.Output('page-1-content', 'children'),
+              [dash.dependencies.Input('page-1-dropdown', 'value')])
+def page_1_dropdown(value):
+    return 'You have selected "{}"'.format(value)
+
+# Tab 2 callback
+@app.callback(Output('page-2-content', 'children'),
+              [Input('page-2-radios', 'value')])
+def page_2_radios(value):
+    return 'You have selected "{}"'.format(value)
+
 
 
 
