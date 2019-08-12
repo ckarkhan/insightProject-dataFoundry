@@ -1,4 +1,4 @@
-# insightProject-trainYourMLmodelsBetter 
+# Better Clinical Diagnosis with Better Metadata
 
 This is my project at Insight Data Engineering. 
 
@@ -17,6 +17,7 @@ created 'by the DS, for the DS'.
 TECH STACK
 AWS S3
 Apache Spark
+PySpark
 Elasticsearch
 Flask
 
